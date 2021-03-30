@@ -258,6 +258,10 @@ p {
   display: none;
 }
 
+.nav {
+  position: fixed;
+}
+
 .nav-link {
   display: block;
   margin-bottom: 8px;
@@ -265,10 +269,6 @@ p {
   font-size: 18px;
   font-weight: 300;
   text-decoration: none;
-}
-
-.nav {
-  position: fixed;
 }
 
 .thumbnail {
@@ -282,7 +282,7 @@ p {
   body {
     padding: 0px 0px 0px 0px;
   }
-  .navigation {
+  .nav {
     display: none;
   }
   .headshot {

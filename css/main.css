@@ -238,9 +238,9 @@ html {
 
 p {
   margin-top: 0px;
-  margin-bottom: 15px;
   color: #627885;
   font-size: 14px;
+  line-height: 20px;
 }
 
 .box {

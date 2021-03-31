@@ -271,11 +271,18 @@ p {
   text-decoration: none;
 }
 
+.pdf {
+  height: 755px;
+}
+
 .thumbnail {
   padding: 0px 10px 0px 0px;
 }
 
 @media (max-width: 991px) {
+  .pdf {
+    height: 575px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -288,6 +295,9 @@ p {
   .headshot {
     display: table-cell;
     padding: 0px 20px 0px 0px;
+  }
+  .pdf {
+    height: 430px;
   }
 }
 

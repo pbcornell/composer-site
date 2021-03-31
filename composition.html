@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+  This site is based on the Florence template from webflow.com
+  https://webflow.com/templates/html/florence-personal-website-template
+  -->
+<html>
+
+<head>
+  <title>Peter B. Cornell, Composer</title>
+  <link href="css/main.css" rel="stylesheet" type="text/css"/>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Music for choir, piano, and solo voice, composed by Peter B. Cornell."/>
+  <meta name="keywords" content="peter b. cornell, peter cornell, composer, choral, choir, solo piano, piano, solo voice, voice, music, composing, composition."/>
+
+<script type="text/javascript">
+function queryParam(name) {
+  var params = window.location.search.substring(1);
+  var param = params.split('&').find(p => p.startsWith(name+'='));
+  return param.split('=')[1];
+}
+
+var catalog = [
+  {
+    "id": 9,
+    "title": "Upon Reflection",
+    "description": "A piano solo for pondering the past as well as what lies ahead.",
+    "instrumentation": ["piano"],
+    "year": 2013,
+    "photo": "music/Upon Reflection.jpg",
+    "sheetmusic": "music/Upon Reflection.pdf",
+    "soundcloud_track": 956320144
+  },
+  {
+    "id": 20,
+    "title": "Skating by Starlight",
+    "description": "A calm, relaxing piece for solo piano.  Walk down to the lake, lace up your skates, and enjoy gliding under a clear, night sky....",
+    "instrumentation": ["piano"],
+    "year": 2020,
+    "photo": "music/Skating by Starlight.jpg",
+    "photo_credit": 'photo by <a href="unsplash.com/photos/MOAEzls4VEA">guille pozzi</a>',
+    "sheetmusic": "music/Skating by Starlight-preview.pdf",
+    "soundcloud_track": 937973560
+  }
+];
+</script>
+</head>
+
+<body id="top">
+  <div class="w-container">
+    <div class="nav box" align="center">
+      <a href="index.html#top"><img src="img/pbc.png" width="150px"></a><br/>
+      <a href="index.html#top">
+        <h1>Peter B. Cornell<br>Composer</h1>
+      </a>
+
+      <hr/>
+
+      <a class="nav-link" href="index.html#spotlight">spotlight</a>
+      <a class="nav-link" href="index.html#compositions">compositions</a>
+
+      <hr/>
+
+      <a href="mailto:info@peterbcornell.com">info@peterbcornell.com</a>
+    </div>
+
+    <div class="w-row" style="margin-left: 0px; margin-right: 0px">
+      <div class="w-col w-col-4"></div>
+      <div class="box w-col w-col-8">
+
+<script type="text/javascript">
+var id = queryParam('id');
+var c = catalog.find(entry => entry.id == id);
+if (!c) {
+  document.write('Unrecognized composition (id=' + id + ')');
+}
+
+document.write('<h2 align="right">' + c.title + '</h2>');
+document.write('<hr/>');
+document.write('<br/>');
+document.write('<table>');
+document.write('<tr>');
+
+if (c.photo) {
+  document.write('<td align="center" valign="top" width="125">');
+  document.write('<img class="thumbnail" src="' + c.photo + '" width="125">');
+  document.write('<br/>');
+  if (c.photo_credit) {
+    document.write('<div class="caption">' + c.photo_credit + '</div>');
+  }
+  document.write('</td>');
+}
+document.write('<td valign="top">');
+document.write('<p>' + c.description + '</p>');
+
+if (c.soundcloud_track) {
+  document.write('<iframe width="100%" height="111" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + c.soundcloud_track + '&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&sharing=false&download=false&show_artwork=false&single_active=true" height="70" frameborder="no" scrolling="no"></iframe>');
+}
+
+document.write('</td>');
+document.write('</tr>');
+document.write('</table>');
+
+if (c.sheetmusic) {
+  document.write('<br/>');
+  document.write('<object class="pdf" data="' + c.sheetmusic + '#toolbar=0" width="100%"></object>');
+}
+</script>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

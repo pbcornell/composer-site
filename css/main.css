@@ -245,6 +245,7 @@ p {
 
 .box {
   background-color: #fff;
+  opacity: 0.9;
   padding: 20px 20px 12px 20px;
   border-top: 7px solid #a2b8c5;
   border-bottom: 7px solid #a2b8c5;
@@ -288,6 +289,9 @@ p {
 @media (max-width: 767px) {
   body {
     padding: 0px 0px 0px 0px;
+  }
+  .box {
+    opacity: 0.95;
   }
   .nav {
     display: none;

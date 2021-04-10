@@ -254,7 +254,6 @@ p {
 
 .caption {
   font-size: 10px;
-  padding: 0px 10px 0px 0px;
 }
 
 .comps {
@@ -282,10 +281,6 @@ p {
 
 .pdf {
   height: 755px;
-}
-
-.thumbnail {
-  padding: 0px 10px 0px 0px;
 }
 
 @media (max-width: 991px) {

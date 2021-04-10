@@ -102,15 +102,6 @@ document.write('<br/>');
 document.write('<table>');
 document.write('<tr>');
 
-if (c.photo) {
-  document.write('<td align="center" valign="top" width="125">');
-  document.write('<img class="thumbnail" src="' + c.photo + '" width="125">');
-  document.write('<br/>');
-  if (c.photo_credit) {
-    document.write('<div class="caption">' + c.photo_credit + '</div>');
-  }
-  document.write('</td>');
-}
 document.write('<td valign="top">');
 document.write('<p>' + c.description + '</p>');
 
@@ -119,6 +110,17 @@ if (c.soundcloud_track) {
 }
 
 document.write('</td>');
+
+if (c.photo) {
+  document.write('<td align="center" valign="top" width="125" style="padding: 0px 0px 0px 10px">');
+  document.write('<img src="' + c.photo + '" width="125">');
+  document.write('<br/>');
+  if (c.photo_credit) {
+    document.write('<div class="caption">' + c.photo_credit + '</div>');
+  }
+  document.write('</td>');
+}
+
 document.write('</tr>');
 document.write('</table>');
 

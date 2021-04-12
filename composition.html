@@ -61,6 +61,29 @@ var catalog = [
     "photo_credit": 'photo by <a href="https://unsplash.com/photos/MOAEzls4VEA" target="_blank">guille pozzi</a>',
     "sheetmusic": "music/Skating by Starlight-preview.pdf",
     "soundcloud_track": 937973560
+  },
+  {
+    "id": 21,
+    "title": "Comfort",
+    "description": "This composition for <i>a cappella</i> SATB choir (with minimal divisi) offers guidance on how and how not to console a grieving friend.  The music progresses at a thoughtful pace and leverages rich chords, as well as silence, to elevate the text by Canadian poet Archibald Lampman (1861-1899).  Instead of &quot;rhetoric, nor the stale Worn truths, that are but maddening mockeries To him whose grief outmasters all replies,&quot; Lampman offers the wisdom of tenderness, and the comfort that comes by simply being present with another in silence:",
+    "lyrics":
+`Comfort the sorrowful with watchful eyes
+    In silence, for the tongue cannot avail.
+    Vex not his wounds with rhetoric, nor the stale
+Worn truths, that are but maddening mockeries
+To him whose grief outmasters all replies.
+    Only watch near him gently; do but bring
+    The piteous help of silent ministering,
+Watchful and tender.    This alone is wise.
+So shall thy presence and thine every motion,
+The grateful knowledge of thy sad devotion,
+    Melt out the passionate hardness of his grief,
+And break the flood-gates of the pent-up soul.
+He shall bow down beneath thy mute control,
+    And take thine hands, and weep, and find relief.`,
+    "instrumentation": ["<i>a cappella</i> SATB choir (minimal divisi)"],
+    "year": 2020,
+    "sheetmusic": "music/Comfort-preview.pdf"
   }
 ];
 </script>
@@ -105,6 +128,14 @@ document.write('<tr>');
 document.write('<td valign="top">');
 document.write('<p>' + c.description + '</p>');
 document.write('</td>');
+
+if (c.lyrics) {
+  var lyrics = c.lyrics;
+  lyrics = lyrics.replace(/\n/gs, '<br/>');
+  lyrics = lyrics.replace(/ /gs, '&nbsp;');
+  document.write('<table align="center"><tr><td><p>' + lyrics + '</p></td></tr></table>');
+  document.write('<p/>');
+}
 
 if (c.photo) {
   document.write('<td rowspan="2" align="center" valign="' + (c.photo_credit ? 'bottom' : 'top') + '" width="125" style="padding: 0px 0px 0px 10px">');

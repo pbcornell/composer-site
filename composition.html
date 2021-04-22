@@ -91,7 +91,7 @@ He shall bow down beneath thy mute control,
 
 <body id="top">
   <div class="w-container">
-    <div class="nav box" align="center">
+    <div class="nav box translucent" align="center">
       <a href="index.html#top"><img src="img/pbc.png" width="150px"></a><br/>
       <a href="index.html#top">
         <h1>Peter B. Cornell<br>Composer</h1>
@@ -110,7 +110,7 @@ He shall bow down beneath thy mute control,
 
     <div class="w-row" style="margin-left: 0px; margin-right: 0px">
       <div class="w-col w-col-4"></div>
-      <div class="box w-col w-col-8">
+      <div class="box translucent w-col w-col-8">
 
 <script type="text/javascript">
 var id = queryParam('id');
@@ -121,7 +121,6 @@ if (!c) {
 
 document.write('<h2 align="right">' + c.title + '</h2>');
 document.write('<hr/>');
-document.write('<br/>');
 document.write('<table>');
 document.write('<tr>');
 
@@ -133,7 +132,7 @@ if (c.lyrics) {
   var lyrics = c.lyrics;
   lyrics = lyrics.replace(/\n/gs, '<br/>');
   lyrics = lyrics.replace(/ /gs, '&nbsp;');
-  document.write('<table align="center"><tr><td><p>' + lyrics + '</p></td></tr></table>');
+  document.write('<table align="center"><tr><td><p/><p>' + lyrics + '</p></td></tr></table>');
   document.write('<p/>');
 }
 

@@ -204,7 +204,7 @@ h1 {
 
 h2 {
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   font-family: sans-serif;
   font-size: 32px;
   line-height: 36px;
@@ -221,7 +221,7 @@ h3 {
 }
 
 h4 {
-  margin: 20px 0px 0px;
+  margin: 0px 0px 0px;
   font-size: 20px;
   font-weight: 300;
   color: #8298a5;
@@ -231,6 +231,7 @@ hr {
   height: 3px;
   background-color: #a2b8c5;
   border: 0;
+  margin-bottom: 15px;
 }
 
 html {
@@ -246,7 +247,6 @@ p {
 
 .box {
   background-color: #fff;
-  opacity: 0.9;
   padding: 20px 20px 12px 20px;
   border-top: 7px solid #a2b8c5;
   border-bottom: 7px solid #a2b8c5;
@@ -259,7 +259,7 @@ p {
 .comps {
   list-style-type: none;
   margin: 0px 15px;
-  padding: 0px;
+  padding: 0px 0px 15px 0px;
 }
 
 .headshot {
@@ -272,7 +272,7 @@ p {
 
 .nav-link {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-family: sans-serif;
   font-size: 18px;
   font-weight: 300;
@@ -281,6 +281,10 @@ p {
 
 .pdf {
   height: 755px;
+}
+
+.translucent {
+  opacity: 0.9;
 }
 
 @media (max-width: 991px) {
@@ -293,7 +297,7 @@ p {
   body {
     padding: 0px 0px 0px 0px;
   }
-  .box {
+  .translucent {
     opacity: 0.95;
   }
   .nav {

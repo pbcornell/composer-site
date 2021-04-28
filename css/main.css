@@ -173,6 +173,78 @@ p {
     width: 100%
   }
 }
+
+.w-input,
+.w-select {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc
+}
+
+.w-input:-moz-placeholder,
+.w-select:-moz-placeholder {
+  color: #999
+}
+
+.w-input::-moz-placeholder,
+.w-select::-moz-placeholder {
+  color: #999;
+  opacity: 1
+}
+
+.w-input:-ms-input-placeholder,
+.w-select:-ms-input-placeholder {
+  color: #999
+}
+
+.w-input::-webkit-input-placeholder,
+.w-select::-webkit-input-placeholder {
+  color: #999
+}
+
+.w-input:focus,
+.w-select:focus {
+  border-color: #8298a5;
+  outline: 0
+}
+
+.w-button {
+  display: inline-block;
+  padding: 9px 15px;
+  background-color: #3898EC;
+  color: white;
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0
+}
+
+.w-button:focus {
+  border-color: #627885;
+  #border-color: #000000;
+  outline: 0
+}
+
+input.w-button {
+  -webkit-appearance: button
+}
+
+button,
+html input[type="button"],
+input[type="reset"] {
+  border: 0;
+  cursor: pointer;
+  -webkit-appearance: button
+}
 /* /webflow */
 
 
@@ -238,6 +310,10 @@ html {
   scroll-behavior: smooth;
 }
 
+label {
+  color: #627885;
+}
+
 p {
   margin-top: 0px;
   color: #627885;
@@ -250,6 +326,10 @@ p {
   padding: 20px 20px 12px 20px;
   border-top: 7px solid #a2b8c5;
   border-bottom: 7px solid #a2b8c5;
+}
+
+.button {
+  background-color: #a2b8c5;
 }
 
 .caption {

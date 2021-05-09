@@ -34,12 +34,44 @@ function queryParam(name) {
   return param.split('=')[1];
 }
 
+function shallowCopy(s, t) {
+  Object.keys(s).forEach(key => t[key] = s[key]);
+}
+
+function resolveById(id) {
+  var c = catalog.find(entry => entry.id == id);
+  if (!c) {
+    document.write('Unrecognized composition (id=' + id + ')');
+  } else {
+    var r = {};
+    if (c.parent_id) {
+      var p = catalog.find(entry => entry.id == c.parent_id);
+      shallowCopy(p, r);
+    }
+    shallowCopy(c, r);
+    return r;
+  }
+}
+
+function getVariations(c) {
+  var vIds = {};
+  vIds[c.id] = 1;
+  var p = c.parent_id ? resolveById(c.parent_id) : c;
+  vIds[p.id] = 1;
+  if (p.child_ids) {
+    p.child_ids.forEach(id => vIds[id] = 1);
+  }
+  return Object.keys(vIds)
+     .map(vId => resolveById(vId))
+     .sort((a, b) => a.instrumentation > b.instrumentation ? 1 : -1);
+}
+
 var catalog = [
   {
     "id": 2,
     "title": "Clearing Skies",
     "description": "Some days are cloudy, and some days are thunderstormy, but the sun always comes out eventually.  The syncopation of this piano solo walks your fingers through it all....",
-    "instrumentation": ["piano"],
+    "instrumentation": "piano",
     "year": 2009,
     "sheetmusic": "music/Clearing Skies-preview.pdf",
   },
@@ -47,14 +79,15 @@ var catalog = [
     "id": 3,
     "title": "Walking in Middleburg",
     "description": "I wrote this solo piano waltz after visiting Middleburg, VA with a friend.  Step back in time with us via this gentle waltz and enjoy the memory of a relaxing afternoon exploring the quaint town of Middleburg.",
-    "instrumentation": ["piano"],
+    "instrumentation": "piano",
     "year": 2009,
     "sheetmusic": "music/Walking in Middleburg-preview.pdf",
   },
   {
     "id": 4,
+    "child_ids": [18],
     "title": "How Silently",
-    "description": "This lovely vocal solo breathes new life into the well-loved Christmas hymn, &quot;O little town of Bethlehem&quot; by Phillips Brooks.  <i>How Silently</i> highlights the wondrous gift of Christ, which continues to bless ever so quietly and gently, and without need of fanfare.  &quot;How silently, how silently The wondrous gift is given; ... still The dear Christ enters in.&quot;<p/>This piece is also available for <a href=\"composition.html?id=18\">choir</a>.",
+    "description": "The well-loved Christmas hymn, &quot;O little town of Bethlehem&quot; is brought to life in this lovely, delicate setting.  As proclaimed by distant morning stars, <i>How Silently</i> highlights the wondrous gift of Christ, which continues to bless ever so quietly and gently, and without need of fanfare.  &quot;How silently, how silently The wondrous gift is given; ... still The dear Christ enters in.&quot;<p/>This composition is available in solo voice and SATB choir arrangements.",
     "lyrics":
 `O little town of Bethlehem,
     How still we see thee lie!
@@ -82,7 +115,7 @@ No ear may hear his coming,
     But, in this world of sin,
 Where meek souls will receive him, still
     The dear Christ enters in.`,
-    "instrumentation": ["voice"],
+    "instrumentation": "solo voice + piano/organ",
     "year": 2009,
     "sheetmusic": "music/How Silently-preview.pdf",
   },
@@ -90,7 +123,7 @@ Where meek souls will receive him, still
     "id": 9,
     "title": "Upon Reflection",
     "description": "This piano solo invites the listener to spend a little time pondering the past&mdash;sometimes joyful, sometimes pensive&mdash;and hopefully, eventually, arrive at some sense of being satisfied.",
-    "instrumentation": ["piano"],
+    "instrumentation": "piano",
     "year": 2013,
     "photo": "music/Upon Reflection.jpg",
     "sheetmusic": "music/Upon Reflection-preview.pdf",
@@ -115,7 +148,7 @@ From far-off pools and wastes of reeds I hear,
 Clear and soft-piped, the chanting frogs break sweet
 In full Pandean chorus.    One by one
 Shine out the stars, and the great night comes on.`,
-    "instrumentation": ["choir"],
+    "instrumentation": "SATB choir",
     "year": 2018,
     "sheetmusic": "music/Evening-preview.pdf",
   },
@@ -159,41 +192,14 @@ Proclaim His salvation!
 Sing unto Him, sing praise to Him!
 Shout hallelujah!
 Give thanks to the Lord!`,
+    "instrumentation": "solo voice + piano",
     "year": 2018,
     "sheetmusic": "music/Give Thanks to the Lord-preview.pdf",
   },
   {
     "id": 18,
-    "title": "How Silently",
-    "description": "The well-loved Christmas hymn &quot;O little town of Bethlehem&quot; is brought to life in this new choral setting.  As proclaimed by distant morning stars, <i>How Silently</i> highlights the wondrous gift of Christ, which continues to bless ever so quietly and gently, without the need for fanfare of any sort.  &quot;How silently, how silently The wondrous gift is given! ... still The dear Christ enters in.&quot;<p/>This piece is also available for <a href=\"composition.html?id=4\">solo voice</a>.",
-    "lyrics":
-`O little town of Bethlehem,
-    How still we see thee lie!
-Above thy deep and dreamless sleep
-    The silent stars go by.
-Yet in thy dark streets shineth
-    The everlasting Light:
-The hopes and fears of all the years
-    Are met in thee tonight.
-
-O morning stars, together
-    Proclaim the holy Birth!
-And praises sing to God the King,
-    And peace to men on earth;
-Where Charity stands watching
-    And Faith holds wide the door,
-The dark night wakes, the glory breaks,
-    And Christmas comes once more.
-
-How silently, how silently
-    The wondrous gift is given!
-So God imparts to human hearts
-    The blessings of his heaven.
-No ear may hear his coming,
-    But, in this world of sin,
-Where meek souls will receive him, still
-    The dear Christ enters in.`,
-    "instrumentation": ["choir"],
+    "parent_id": 4,
+    "instrumentation": "SATB choir",
     "year": 2019,
     "sheetmusic": "music/How Silently for choir-preview.pdf",
   },
@@ -201,7 +207,7 @@ Where meek souls will receive him, still
     "id": 20,
     "title": "Skating by Starlight",
     "description": "A calm, relaxing piece for solo piano.  Walk down to the lake, lace up your skates, and enjoy gliding under a clear, night sky....",
-    "instrumentation": ["piano"],
+    "instrumentation": "piano",
     "year": 2020,
     "photo": "music/Skating by Starlight.jpg",
     "photo_credit": 'photo by <a href="https://unsplash.com/photos/MOAEzls4VEA" target="_blank">guille pozzi</a>',
@@ -227,10 +233,39 @@ The grateful knowledge of thy sad devotion,
 And break the flood-gates of the pent-up soul.
 He shall bow down beneath thy mute control,
     And take thine hands, and weep, and find relief.`,
-    "instrumentation": ["<i>a cappella</i> SATB choir (minimal divisi)"],
+    "instrumentation": "SATB choir",
     "year": 2020,
     "sheetmusic": "music/Comfort-preview.pdf"
-  }
+  },
+  {
+    "id": 22,
+    "child_ids": [23],
+    "title": "Variations on a Theme by Puccini",
+    "description": `This composition explores the experience of Cio-Cio-San, the lead character of Puccini's opera <i>Madama Butterfly</i>.  Puccini's delicate &quot;Coro a bocca chiusa&quot; (commonly known as the &quot;Humming Chorus&quot;) serves as the theme and represents the essence of Cio-Cio-San’s character&mdash;hope and faithfulness in the face of uncertainty.  Each subsequent variation represents a different aspect of her experience, following the opera’s order of events.
+<p/>
+It is important to clarify the intent of the final variation, &quot;Honor.&quot;  The opera presents Cio-Cio-San as an individual shamed by society due solely to the actions of others; shame that leads her to suicide.  The final variation of this composition ammends the story by affirming Cio-Cio-San’s honor as fully intact and not in need of restoration.  Her character&mdash;her faithfulness and hopefulness despite the admonitions of those around her&mdash;is to be revered in spite of the wrongs done to her by others.
+<p/>
+Puccini's theme is presented first, followed by six variations.
+<blockquote>
+1. Theme<br/>
+2. Wedding<br/>
+3. Waiting<br/>
+4. Child<br/>
+5. Loss<br/>
+6. Death<br/>
+7. Honor<br/>
+</blockquote>`,
+    "instrumentation": "wind quintet",
+    "year": 2020,
+    "sheetmusic": "music/Variations on a Theme by Puccini-preview.pdf"
+  },
+  {
+    "id": 23,
+    "parent_id": 22,
+    "instrumentation": "flute, violin, cello, and piano",
+    "year": 2021,
+    "sheetmusic": "music/Variations on a Theme by Puccini for flute, violin, cello, piano-preview.pdf"
+  },
 ];
 </script>
 </head>
@@ -261,10 +296,7 @@ He shall bow down beneath thy mute control,
 
 <script type="text/javascript">
 var id = queryParam('id');
-var c = catalog.find(entry => entry.id == id);
-if (!c) {
-  document.write('Unrecognized composition (id=' + id + ')');
-}
+var c = resolveById(id);
 
 document.write('<h2 align="right">' + c.title + '</h2>');
 document.write('<hr/>');
@@ -310,10 +342,25 @@ if (c.photo_credit) {
 
 document.write('</table>');
 
-if (c.sheetmusic) {
-  document.write('<br/>');
-  document.write('<object class="pdf" data="' + c.sheetmusic + '#toolbar=0" width="100%"></object>');
-}
+
+document.write('<p/>');
+document.write('<div class="tabs">');
+
+var variations = getVariations(c);
+variations.forEach((v, i) => {
+  document.write('<input id="' + i + '" name="tabs" type="radio"'
+      + (id == v.id ? ' checked' : '') + '/>');
+  document.write('<label for="' + i + '">' + v.instrumentation + '</label>');
+});
+document.write('<div class="panels">');
+variations.forEach(v => {
+  document.write('<div class="panel">');
+  document.write('<object class="pdf" data="' + v.sheetmusic + '#toolbar=0" width="100%"></object>');
+  document.write('</div>');
+});
+document.write('</div>');
+document.write('</div>');
+
 </script>
 
       </div>
